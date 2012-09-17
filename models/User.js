@@ -7,7 +7,13 @@ var iterations = 12000;
  * @param  {Object} db
  * @return {Object}
  */
+
 exports.define = function(mongoose, db) {
+
+  /**
+   * Constructor
+   */
+  var User = null;
 
   /**
    * Schema
@@ -38,6 +44,7 @@ exports.define = function(mongoose, db) {
   /**
    * Virtuals
    */
+
   schema.virtual('isRegistered').get(function() {
     return !!(this.hash && this.salt);
   });
@@ -45,6 +52,7 @@ exports.define = function(mongoose, db) {
   /**
    * Indexes
    */
+
   schema.path('email').index({ unique: true });
 
   /**
@@ -58,6 +66,7 @@ exports.define = function(mongoose, db) {
    * @param  {Function} params.onComplete fn(hash:String)
    * @static
    */
+
   schema.statics.getPasswordHash = function (params) {
 
     if (!params) {
@@ -90,6 +99,7 @@ exports.define = function(mongoose, db) {
    * @param  {Function} onComplete fn(salt:String)
    * @static
    */
+
   schema.statics.getPasswordSalt = function(onComplete) {
 
     if (!onComplete) {
@@ -111,6 +121,7 @@ exports.define = function(mongoose, db) {
   /**
    * Validators
    */
+
   var outsideNameWhitelist = /[^0-9A-Z \-\(\)_\.]/gi;
   var mobileMatch = /^(0|\+[0-9]{2})7[0-9]{9}$/;
   var outsideEmailWhitelist = /[^@0-9A-Z \-\(\)_\.]/gi;
@@ -132,6 +143,7 @@ exports.define = function(mongoose, db) {
   /**
    * Methods
    */
+
   schema.methods.encryptPassword = function(password, onComplete) {
 
     var self = this;
@@ -165,14 +177,25 @@ exports.define = function(mongoose, db) {
   /**
    * Hooks
    */
+
   schema.pre('save', function (next, done) {
 
+    var self = this;
+
+    // don't save unless we have a hash and salt
     if (this.isRegistered !== true) {
-      this.invalidate('isRegistered', 'User is not Registered');
+      this.invalidate('isRegistered', 'User is not registered');
     }
 
+    // don't save if invalid
     this.validate(function (err) {
-      err ? done(err) : next();
+      return err ?
+        done(err)
+        : !self.isNew ?
+          next()
+          : User.where('email').equals(self.email).where('_id').ne(self._id).findOne(function(err, result) {
+              return err ? done(err) : result ? done('Email already registered') : next();
+            });
     });
 
   });
@@ -180,6 +203,7 @@ exports.define = function(mongoose, db) {
   /**
    * Model
    */
-  return db.model('User', schema);
+
+  return (User = db.model('User', schema));
 
 };
