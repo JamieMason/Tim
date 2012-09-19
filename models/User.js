@@ -1,6 +1,9 @@
+var mongoose = require('mongoose');
+var database = require('../modules/database');
 var crypto = require('crypto');
 var keyLength = 128;
 var iterations = 12000;
+var User = null;
 
 /**
  * @param  {Object} mongoose
@@ -8,12 +11,13 @@ var iterations = 12000;
  * @return {Object}
  */
 
-exports.define = function(mongoose, db) {
+exports.get = function() {
 
-  /**
-   * Constructor
-   */
-  var User = null;
+  if (User) {
+    return User;
+  }
+
+  var db = database.get();
 
   /**
    * Schema
@@ -204,6 +208,8 @@ exports.define = function(mongoose, db) {
    * Model
    */
 
-  return (User = db.model('User', schema));
+  User = db.model('User', schema);
+
+  return User;
 
 };

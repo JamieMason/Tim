@@ -68,7 +68,7 @@ exports.middleware = function(req, res, next) {
 exports.init = function(app) {
 
   messaging = require('../modules/messaging');
-  User = require('../models').get('User');
+  User = require('../models/User').get();
 
   app.get('/logout', function(req, res) {
     req.session.destroy(function() {
