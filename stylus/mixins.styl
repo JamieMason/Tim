@@ -1,0 +1,29 @@
+vendor(prop, args)
+  -webkit-{prop} args
+  -moz-{prop} args
+  -ms-{prop} args
+  {prop} args
+
+border-radius()
+  vendor('border-radius', arguments)
+
+box-sizing()
+  vendor('box-sizing', arguments)
+
+appearance()
+  vendor('box-sizing', arguments)
+
+background-linear-gradient(start, end)
+  background-color: start
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, start), color-stop(100%, end))
+  background-image: -webkit-linear-gradient(top, start, end)
+  background-image: -moz-linear-gradient(top, start, end)
+  background-image: -ms-linear-gradient(top, start, end)
+  background-image: -o-linear-gradient(top, start, end)
+  background-image: linear-gradient(top, start, end)
+
+border-colors(t, r, b, l)
+  border-top: 1px solid t
+  border-right: 1px solid r
+  border-bottom: 1px solid b
+  border-left: 1px solid l

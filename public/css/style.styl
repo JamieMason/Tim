@@ -1,0 +1,141 @@
+$font-family = 'Helvetica Neue', Arial, Helvetica, sans-serif
+
+@import '../../stylus/normalise-2.0.1'
+@import '../../stylus/mixins'
+
+// ============================================================
+// Base
+// ============================================================
+
+html
+  font: 0.875em/1.5 $font-family
+
+a
+  color: #08C
+
+h1,h2,h3,h4,h5,h6,hgroup,
+ul,ol,dd,
+p,figure,
+pre,table,fieldset,hr,
+.island
+  margin-top: 0
+  margin-right: 0
+  margin-bottom: 1.5rem
+
+body
+  color: #333
+  padding: 1.5rem
+
+ol
+ul
+  list-style: none
+
+input[type='text']
+input[type='email']
+input[type='password']
+textarea
+select
+  appearance: none
+  border-radius: 3px
+  box-sizing: border-box
+  resize: none
+  border: 1px solid #DEDEDE
+  color: #666
+  padding: 0.5rem 0.6rem
+
+// ============================================================
+// Common
+// ============================================================
+
+.island
+  padding: 1.5em
+
+.island > :last-child
+  margin-bottom: 0
+
+.msgs
+  padding-left: 0
+
+.msg
+  background-color: #F3F3F3
+
+.msg-error
+  background-color: #FCC
+  color: #900
+
+
+// ============================================================
+// Forms
+// ============================================================
+
+/*ul/ol*/.field-set
+  padding-left: 0
+
+.field-set > /*li*/.field
+  clear: both
+  margin-bottom: 0.5rem
+  position: relative
+
+.field-set > .field label
+  width: 11em
+  padding: 0.5rem
+  color: #9E9E9E
+  clear: left
+  float: left
+
+.field-set-stacked > .field label
+  display: block
+  width: auto
+  clear: both
+  float: none
+
+.field-set > .field input[type='text']
+.field-set > .field input[type='email']
+.field-set > .field input[type='password']
+.field-set > .field textarea
+.field-set > .field select
+  width: 18em
+
+/*input[type='text']*/.field-submit
+  background: white url('/img/field-submit.png') no-repeat 100% 50%
+  padding-right: 32px
+
+.field-set > .field input[type='submit']
+  margin-left: 15.3em
+
+/*ul/ol*/.field-set-stacked > .field input[type='submit']
+  margin-left: 0
+
+.buttonless-form > input[type='submit']
+  position: absolute
+  left: -9999em
+
+// ============================================================
+// Buttons
+// ============================================================
+
+.btn-alpha
+  background-linear-gradient: #A5B8DA, #7089B3
+  border-colors: #758FBA, #6C84AB, #5C6F91, #6C84AB
+  -webkit-box-shadow: inset 0 1px 0 0 #AEC3E5
+  box-shadow: inset 0 1px 0 0 #AEC3E5
+  border-radius: 18px
+  color: #FFF
+  font: bold 0.786em/1 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif
+  padding: 8px 0
+  text-align: center
+  text-shadow: 0 -1px 1px #64799E
+  text-transform: uppercase
+  width: 150px
+
+.btn-alpha:hover
+  background-linear-gradient: #9BADCC, #687FA6
+  border-colors: #6D86AD, #647A9E, #546685, #647A9E
+  -webkit-box-shadow: inset 0 1px 0 0 #A5B9D9
+  box-shadow: inset 0 1px 0 0 #A5B9D9
+  cursor: pointer
+
+.btn-alpha:active
+  border: 1px solid #546685
+  -webkit-box-shadow: inset 0 0 8px 2px #7E8DA6, 0 1px 0 0 #EEE
+  box-shadow: inset 0 0 8px 2px #7E8DA6, 0 1px 0 0 #EEE
