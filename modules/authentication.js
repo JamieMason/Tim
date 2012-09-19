@@ -84,7 +84,7 @@ exports.init = function(app) {
       } else {
         req.session.regenerate(function() {
           req.session.user = user;
-          messaging.queue('success', req, 'Authenticated as ' + req.body.email);
+          // messaging.queue('success', req, 'Authenticated as ' + req.body.email);
           res.redirect(req.body.redirectUrl || '/');
         });
       }
