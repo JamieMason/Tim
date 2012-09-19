@@ -1,0 +1,26 @@
+//-
+  OVERRIDABLE DEFAULTS
+  ----------------------------------------------------------------
+  o.action:        '/api/register'
+  o.nameLabel:    'Name'
+  o.emailLabel:    'Email'
+  o.passwordLabel: 'Password'
+  o.submitLabel:   'Register'
+
+mixin registrationForm(o)
+  form(action=o.action || '/api/register', method='post')
+    ul.field-set
+      li.field
+        label(for='reg-name')
+          = o.nameLabel || 'Name'
+        input.input-text(type='text', name='name', id='reg-name')
+      li.field
+        label(for='reg-email')
+          = o.emailLabel || 'Email'
+        input.input-text(type='email', name='email', id='reg-email')
+      li.field
+        label(for='reg-password')
+          = o.passwordLabel || 'Password'
+        input.input-password(type='password', name='password', id='reg-password')
+
+    input.btn-alpha(type='submit', value=o.submitLabel || 'Register')

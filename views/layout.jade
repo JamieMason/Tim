@@ -1,0 +1,18 @@
+doctype 5
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/css/style.css')
+  body
+    if locals.user
+      p
+        | Logged in as #{user.name} (#{user.email})
+        = ' '
+        a(href='/logout') Sign Out
+
+    if locals.messages
+      ul.msgs
+        each message in messages
+          li(class='island msg msg-#{message.type}')
+              = message.message
+    block content
