@@ -4,11 +4,15 @@ var path = require('path');
 var express = require('express');
 var app = express();
 
-// Environment
-var env = require('./environments').select('localhost');
-var lang = require('./languages').select('en-GB');
+// Environment Modules
+var languages = require('./languages');
+var environments = require('./environments');
 
-// Modules
+// Current Environment
+var env = environments.select('localhost');
+var lang = languages.select('en-GB');
+
+// Application Modules
 var database = require('./modules/database');
 var messaging = require('./modules/messaging');
 var authentication = require('./modules/authentication');
@@ -25,6 +29,7 @@ app.configure(function(){
   app.use(express.cookieParser(env('APP_COOKIE_SECRET')));
   app.use(express.session());
 
+  languages.init(app);
   messaging.init(app);
   authentication.init(app);
 
