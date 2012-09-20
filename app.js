@@ -25,20 +25,6 @@ app.configure(function(){
   app.use(express.cookieParser(env('APP_COOKIE_SECRET')));
   app.use(express.session());
 
-  app.use(function(req, res, next) {
-    var user = req.session && req.session.user ? req.session.user : null;
-
-    res.locals.user = user ? {
-      _id: user._id,
-      created: user.created,
-      email: user.email,
-      name: user.name,
-      roster: user.roster
-    } : null;
-
-    next();
-  });
-
   messaging.init(app);
   authentication.init(app);
 
