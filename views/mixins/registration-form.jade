@@ -1,15 +1,15 @@
 //-
   OVERRIDABLE DEFAULTS
   ----------------------------------------------------------------
-  o.action:        '/api/register'
+  o.action:        '/register'
   o.nameLabel:    'Name'
   o.emailLabel:    'Email'
   o.passwordLabel: 'Password'
   o.submitLabel:   'Register'
 
 mixin registrationForm(o)
-  form(action=o.action || '/api/register', method='post')
-    ul.field-set
+  form(action=o.action || '/register', method='post')
+    ul.field-set.field-set-stacked
       li.field
         label(for='reg-name')
           = o.nameLabel || 'Name'
@@ -22,5 +22,5 @@ mixin registrationForm(o)
         label(for='reg-password')
           = o.passwordLabel || 'Password'
         input.input-password(type='password', name='password', id='reg-password')
-
-    input.btn-alpha(type='submit', value=o.submitLabel || 'Register')
+      li.field
+        input.btn-alpha(type='submit', value=o.submitLabel || 'Register')

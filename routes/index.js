@@ -5,7 +5,7 @@ var authentication = require('../modules/authentication');
 exports.init = function(app) {
   app.get('/', site.index);
   app.get('/login', site.login);
-  app.get('/register', register.view);
-  app.post('/register', register.create);
-  app.get('/restricted', authentication.middleware, site.restricted);
+  app.get('/register', register.get);
+  app.post('/register', register.post);
+  app.get('/restricted', authentication.restrictRoute, site.restricted);
 };

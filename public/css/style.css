@@ -288,6 +288,7 @@ select {
 /*ul/ol*/
 .field-set-stacked > .field input[type='submit'] {
   margin-left: 0;
+  margin-top: 0.5rem;
 }
 .buttonless-form > input[type='submit'] {
   position: absolute;

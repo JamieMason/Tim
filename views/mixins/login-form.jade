@@ -8,7 +8,7 @@
 
 mixin loginForm(o)
   form(action=o.action || '/login', method='post')
-    ul.field-set.field-set-stacked
+    ul.field-set
       li.field
         label(for='login-email')
           = o.emailLabel || 'Email'
@@ -19,5 +19,5 @@ mixin loginForm(o)
           a(href="/forgot-password", tabindex="2")
             = 'Forgot it?'
         input.field-submit(type='password', name='password', id='login-password')
-
-    input.btn-alpha(type='submit', value=o.submitLabel || 'Sign In')
+      li.field
+        input.btn-alpha(type='submit', value=o.submitLabel || 'Sign In')
