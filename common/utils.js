@@ -13,15 +13,18 @@ exports.packageProxy = function(module, modulePath) {
 
   /**
    * Returns the named propery of dictionary, optionally performing a find/replace of the keys/values in replacements
-   * @param  {Object} dictionary
    * @param  {String} definition
    * @param  {Object} [replacements]
    * @return {Mixed}
    * @private
    */
-  function getValue(dictionary, definition, replacements) {
+  function getValue(definition, replacements) {
 
-    var value = dictionaries[dictionary][definition];
+    if (!cursor) {
+      throw new Error('Call to get() when no call to select("dictionary") has been made');
+    }
+
+    var value = dictionaries[cursor][definition];
     var token;
 
     if (replacements) {
@@ -42,13 +45,13 @@ exports.packageProxy = function(module, modulePath) {
    */
   module.select = function(dictionary) {
 
+    cursor = dictionary;
+
     if (!dictionaries[dictionary]) {
       dictionaries[dictionary] = require(modulePath + '/' + dictionary);
     }
 
-    cursor = dictionary;
-
-    return getValue.bind({}, dictionary);
+    return getValue;
 
   };
 
@@ -58,11 +61,7 @@ exports.packageProxy = function(module, modulePath) {
    */
   module.get = function() {
 
-    if (!cursor) {
-      throw new Error('Call to get() when no call to select("what") has been made');
-    }
-
-    return getValue.bind({}, cursor);
+    return getValue;
 
   };
 
