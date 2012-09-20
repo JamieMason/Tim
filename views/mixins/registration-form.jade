@@ -8,19 +8,19 @@
   o.submitLabel:   'Register'
 
 mixin registrationForm(o)
-  form(action=o.action || '/register', method='post')
+  form(action=o.action || lang('/register.route'), method='post')
     ul.field-set.field-set-stacked
       li.field
         label(for='reg-name')
-          = o.nameLabel || 'Name'
+          = o.nameLabel || lang('LABEL_NAME')
         input.input-text(type='text', name='name', id='reg-name')
       li.field
         label(for='reg-email')
-          = o.emailLabel || 'Email'
+          = o.emailLabel || lang('LABEL_EMAIL')
         input.input-text(type='email', name='email', id='reg-email')
       li.field
         label(for='reg-password')
-          = o.passwordLabel || 'Password'
+          = o.passwordLabel || lang('LABEL_PASSWORD')
         input.input-password(type='password', name='password', id='reg-password')
       li.field
-        input.btn-alpha(type='submit', value=o.submitLabel || 'Register')
+        input.btn-alpha(type='submit', value=o.submitLabel || lang('ACTION_REGISTER'))

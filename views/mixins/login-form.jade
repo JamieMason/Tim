@@ -7,17 +7,17 @@
   o.submitLabel:   'Login'
 
 mixin loginForm(o)
-  form(action=o.action || '/login', method='post')
+  form.form-login(action=o.action || lang('/login.route'), method='post')
     ul.field-set
-      li.field
+      li.field.field-email
         label(for='login-email')
-          = o.emailLabel || 'Email'
-        input.input-text(type='email', name='email', id='login-email', placeholder='you@yours.com')
-      li.field
+          = o.emailLabel || lang('LABEL_EMAIL')
+        input.input-text(type='email', name='email', id='login-email', placeholder=lang('PLACEHOLDER_EMAIL'))
+      li.field.field-password
         label(for='login-password')
-          = (o.passwordLabel || 'Password') + ' '
-          a(href="/forgot-password", tabindex="2")
-            = 'Forgot it?'
+          = (o.passwordLabel || lang('LABEL_PASSWORD'))
         input.field-submit(type='password', name='password', id='login-password')
+        a(href=lang('/reset-password.route'))
+          = lang('/reset-password.label')
       li.field
-        input.btn-alpha(type='submit', value=o.submitLabel || 'Sign In')
+        input.btn-alpha(type='submit', value=o.submitLabel || lang('ACTION_LOG_IN'))

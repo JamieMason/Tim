@@ -1,11 +1,12 @@
 var site = require('./site');
 var register = require('./register');
 var authentication = require('../modules/authentication');
+var lang = require('../languages').get();
 
 exports.init = function(app) {
-  app.get('/', site.index);
-  app.get('/login', site.login);
-  app.get('/register', register.get);
-  app.post('/register', register.post);
-  app.get('/restricted', authentication.restrictRoute, site.restricted);
+  app.get(lang('/.route'), site.index);
+  app.get(lang('/login.route'), site.login);
+  app.get(lang('/register.route'), register.get);
+  app.post(lang('/register.route'), register.post);
+  app.get(lang('/restricted.route'), authentication.restrictRoute, site.restricted);
 };

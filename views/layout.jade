@@ -1,18 +1,20 @@
 doctype 5
 html
   head
-    title= title
-    link(rel='stylesheet', href='/css/style.css')
+    include includes/head
   body
-    if locals.user
-      p
-        | Logged in as #{user.name} (#{user.email})
-        = ' '
-        a(href='/logout') Sign Out
+    include includes/current-user
+    include includes/messaging
 
-    if locals.messages
-      ul.msgs
-        each message in messages
-          li(class='island msg msg-#{message.type}')
-              = message.message
+    ul.nav.site-nav
+      li
+        a(href=lang('/login.route'))
+          = lang('/login.label')
+      li
+        a(href=lang('/register.route'))
+          = lang('/register.label')
+      li
+        a(href=lang('/restricted.route'))
+          = lang('/restricted.label')
+
     block content

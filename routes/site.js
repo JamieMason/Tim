@@ -1,17 +1,19 @@
+var lang = require('../languages').get();
+
 exports.index = function(req, res) {
   res.render('index', {
-    title: "Home"
+    title: lang('/.title')
   });
 };
 
 exports.login = function(req, res) {
   res.render('login', {
-    title: 'Sign In'
+    title: lang('/login.title')
   });
 };
 
 exports.restricted = function(req, res) {
   res.render('restricted', {
-    title: 'Welcome to VIP!'
+    title: lang('/restricted.title')
   });
 };

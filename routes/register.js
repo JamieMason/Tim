@@ -1,6 +1,8 @@
+var lang = require('../languages').get();
+
 exports.get = function(req, res) {
   res.render('register', {
-    title: "Register"
+    title: lang('/register.title')
   });
 };
 
