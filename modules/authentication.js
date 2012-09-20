@@ -1,5 +1,6 @@
 var messaging = null;
 var User = null;
+var lang = require('../languages').get();
 
 /**
  * Query an email/password combination against the database, calling onComplete(err, user)
@@ -12,21 +13,23 @@ exports.authenticate = function (email, password, onComplete) {
   console.log('authenticating', email);
 
   if (!email) {
-    return onComplete('Email missing');
+    return onComplete(lang('EMAIL_NOT_SUPPLIED'));
   }
 
   if (!password) {
-    return onComplete('Password missing');
+    return onComplete(lang('PASSWORD_NOT_SUPPLIED'));
   }
 
   User.where('email').equals(email).findOne(function(err, user) {
 
     if (err) {
-      return onComplete('Database error');
+      return onComplete(lang('DB_ERROR'));
     }
 
     if (!user) {
-      return onComplete('no user found with email ' + email);
+      return onComplete(lang('EMAIL_NOT_FOUND', {
+        email: email
+      }));
     }
 
     var dbSalt = user.get('salt');
@@ -36,7 +39,7 @@ exports.authenticate = function (email, password, onComplete) {
       password: password,
       salt: dbSalt,
       onComplete: function(passwordHash) {
-        passwordHash === dbHash ? onComplete(null, user) : onComplete('Email and password do not match');
+        passwordHash === dbHash ? onComplete(null, user) : onComplete(lang('AUTH_INCORRECT'));
       }
     });
 
@@ -54,7 +57,7 @@ exports.restrictRoute = function(req, res, next) {
   if (req.session.user) {
     next();
   } else {
-    messaging.queue('error', req, 'Access denied!');
+    messaging.queue('error', req, lang('AUTH_REQUIRED'));
     res.redirect('/login');
   }
 };

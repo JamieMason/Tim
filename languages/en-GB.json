@@ -1,0 +1,8 @@
+{
+  "AUTH_INCORRECT"         : "Email and password do not match"
+  , "AUTH_REQUIRED"        : "Access denied!"
+  , "DB_ERROR"             : "Database error"
+  , "EMAIL_NOT_FOUND"      : "No user found with email #{email}"
+  , "EMAIL_NOT_SUPPLIED"   : "Email missing"
+  , "PASSWORD_NOT_SUPPLIED": "Password missing"
+}
