@@ -1,0 +1,37 @@
+{
+  "AUTH_INCORRECT"       : "[NL] Email and password do not match",
+  "AUTH_REQUIRED"        : "[NL] Access denied!",
+  "DB_ERROR"             : "[NL] Database error",
+  "EMAIL_NOT_FOUND"      : "[NL] No user found with email #{email}",
+  "EMAIL_NOT_SUPPLIED"   : "[NL] Email missing",
+  "PASSWORD_NOT_SUPPLIED": "[NL] Password missing",
+  "CURRENT_USER"         : "[NL] Logged in as #{name} (#{email})",
+
+  "/.route"              : "/nl/",
+  "/login.route"         : "/nl/login",
+  "/logout.route"        : "/nl/logout",
+  "/register.route"      : "/nl/register",
+  "/restricted.route"    : "/nl/restricted",
+  "/reset-password.route": "/nl/reset-password",
+
+  "/.title"              : "[NL] Welcome",
+  "/login.title"         : "[NL] Sign In",
+  "/logout.title"        : "[NL] Sign Out",
+  "/register.title"      : "[NL] Register",
+  "/restricted.title"    : "[NL] Welcome to VIP!",
+  "/reset-password.title": "[NL] Reset Password",
+
+  "/.label"              : "[NL] Home",
+  "/login.label"         : "[NL] Sign In",
+  "/logout.label"        : "[NL] Sign Out",
+  "/register.label"      : "[NL] Register",
+  "/restricted.label"    : "[NL] Members Area",
+  "/reset-password.label": "[NL] Reset Password",
+
+  "LABEL_NAME"           : "[NL] Name",
+  "LABEL_EMAIL"          : "[NL] Email",
+  "PLACEHOLDER_EMAIL"    : "[NL] you@yours.com",
+  "LABEL_PASSWORD"       : "[NL] Password",
+  "ACTION_REGISTER"      : "[NL] Register",
+  "ACTION_LOG_IN"        : "[NL] Sign In"
+}

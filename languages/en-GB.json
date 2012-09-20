@@ -1,8 +1,37 @@
 {
-  "AUTH_INCORRECT"         : "Email and password do not match"
-  , "AUTH_REQUIRED"        : "Access denied!"
-  , "DB_ERROR"             : "Database error"
-  , "EMAIL_NOT_FOUND"      : "No user found with email #{email}"
-  , "EMAIL_NOT_SUPPLIED"   : "Email missing"
-  , "PASSWORD_NOT_SUPPLIED": "Password missing"
+  "AUTH_INCORRECT"       : "Email and password do not match",
+  "AUTH_REQUIRED"        : "Access denied!",
+  "DB_ERROR"             : "Database error",
+  "EMAIL_NOT_FOUND"      : "No user found with email #{email}",
+  "EMAIL_NOT_SUPPLIED"   : "Email missing",
+  "PASSWORD_NOT_SUPPLIED": "Password missing",
+  "CURRENT_USER"         : "Logged in as #{name} (#{email})",
+
+  "/.route"              : "/",
+  "/login.route"         : "/login",
+  "/logout.route"        : "/logout",
+  "/register.route"      : "/register",
+  "/restricted.route"    : "/restricted",
+  "/reset-password.route": "/reset-password",
+
+  "/.title"              : "Welcome",
+  "/login.title"         : "Sign In",
+  "/logout.title"        : "Sign Out",
+  "/register.title"      : "Register",
+  "/restricted.title"    : "Welcome to VIP!",
+  "/reset-password.title": "Reset Password",
+
+  "/.label"              : "Home",
+  "/login.label"         : "Sign In",
+  "/logout.label"        : "Sign Out",
+  "/register.label"      : "Register",
+  "/restricted.label"    : "Members Area",
+  "/reset-password.label": "Reset Password",
+
+  "LABEL_NAME"           : "Name",
+  "LABEL_EMAIL"          : "Email",
+  "PLACEHOLDER_EMAIL"    : "you@yours.com",
+  "LABEL_PASSWORD"       : "Password",
+  "ACTION_REGISTER"      : "Register",
+  "ACTION_LOG_IN"        : "Sign In"
 }
