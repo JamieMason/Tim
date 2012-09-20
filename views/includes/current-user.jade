@@ -1,0 +1,6 @@
+if locals.user
+  p
+    = lang('CURRENT_USER', { name: user.name, email: user.email})
+    = ' '
+    a(href=lang('/logout.route'))
+      = lang('/logout.title')

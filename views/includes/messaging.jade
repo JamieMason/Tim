@@ -1,0 +1,5 @@
+if locals.messages
+  ul.msgs
+    each message in messages
+      li(class='island msg msg-#{message.type}')
+          = message.message
