@@ -1,6 +1,6 @@
 var messaging = null;
 var User = null;
-var lang = require('../languages').get();
+var lang = require('../modules/languages').get();
 
 /**
  * Query an email/password combination against the database, calling onComplete(err, user)

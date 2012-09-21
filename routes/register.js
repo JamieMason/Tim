@@ -1,4 +1,4 @@
-var lang = require('../languages').get();
+var lang = require('../modules/languages').get();
 
 exports.get = function(req, res) {
   res.render('register', {

@@ -1,7 +1,7 @@
 var site = require('./site');
 var register = require('./register');
 var authentication = require('../modules/authentication');
-var lang = require('../languages').get();
+var lang = require('../modules/languages').get();
 
 exports.init = function(app) {
   app.get(lang('/.route'), site.index);

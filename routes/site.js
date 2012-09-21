@@ -1,4 +1,4 @@
-var lang = require('../languages').get();
+var lang = require('../modules/languages').get();
 
 exports.index = function(req, res) {
   res.render('index', {
