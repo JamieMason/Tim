@@ -58,7 +58,7 @@ exports.restrictRoute = function(req, res, next) {
     next();
   } else {
     messaging.queue('error', req, lang('AUTH_REQUIRED'));
-    res.redirect('/login');
+    res.redirect(lang('/login.route'));
   }
 };
 
@@ -96,28 +96,6 @@ exports.init = function(app) {
   User = require('../models/User').get();
 
   app.use(exposeUser);
-
-  app.get('/logout', function(req, res) {
-    req.session.destroy(function() {
-      res.redirect('/');
-    });
-  });
-
-  app.post('/login', function(req, res) {
-    exports.authenticate(req.body.email, req.body.password, function(err, user) {
-      if (err) {
-        messaging.queue('error', req, err);
-        res.redirect('/login');
-      } else {
-        req.session.regenerate(function() {
-          req.session.user = user;
-          // messaging.queue('success', req, 'Authenticated as ' + req.body.email);
-          res.redirect(req.body.redirectUrl || '/');
-        });
-      }
-    });
-  });
-
   return exports;
 
 };
