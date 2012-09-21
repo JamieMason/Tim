@@ -2,12 +2,16 @@
  * Provides multiple getters each referencing a single pool of polymorphic sources.
  * The source in use can be changed centrally using select, affecting all getters.
  * This is useful in the case of environment config and languages for example.
- * @param  {Object} module
- * @param  {String} modulePath
+ * @param {Object} params.extend
+ * @param {String} params.dirRoot
+ * @param {Function} [params.onCreate]
  * @return module
  */
-exports.packageProxy = function(module, modulePath) {
+exports.packageProxy = function(params) {
 
+  var module = params.extend;
+  var modulePath = params.dirRoot;
+  var onCreate = params.onCreate || function(){};
   var dictionaries = {};
   var cursor = null;
 
@@ -18,6 +22,7 @@ exports.packageProxy = function(module, modulePath) {
    * @return {Mixed}
    * @private
    */
+
   function getValue(definition, replacements) {
 
     if (!cursor) {
@@ -43,22 +48,25 @@ exports.packageProxy = function(module, modulePath) {
    * @param  {String} dictionary
    * @return {Function} getValue
    */
+
   module.select = function(dictionary) {
 
     cursor = dictionary;
 
     if (!dictionaries[dictionary]) {
-      dictionaries[dictionary] = require(modulePath + '/' + dictionary);
+      onCreate(dictionaries[dictionary] = require(modulePath + '/' + dictionary));
     }
 
     return getValue;
 
   };
 
+
   /**
    * Return a getter for the selected dictionary
    * @return {Function} getValue
    */
+
   module.get = function() {
 
     return getValue;
@@ -66,4 +74,5 @@ exports.packageProxy = function(module, modulePath) {
   };
 
   return module;
+
 };
