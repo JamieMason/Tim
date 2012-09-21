@@ -9,10 +9,11 @@ var languages = require('./modules/languages');
 var environments = require('./modules/environments');
 
 // Current Environment
-var env = environments.select('localhost');
+environments.select('localhost');
 languages.select('en-gb');
 
 // Application Modules
+var env = environments.get();
 var database = require('./modules/database');
 var messaging = require('./modules/messaging');
 var authentication = require('./modules/authentication');
