@@ -116,11 +116,17 @@ exports.packageProxy = function(params) {
    * @return {Function}
    */
   module.get = function(dictionaryName) {
+
     if (!dictionaryName) {
       return selectedDictionaryReader;
     }
+
     getDictionary(dictionaryName);
-    return translateDefinition.bind(null, dictionaryName);
+
+    return function(definitionName, substitutions) {
+      return translateDefinition(dictionaryName, definitionName, substitutions);
+    };
+
   };
 
   return module;

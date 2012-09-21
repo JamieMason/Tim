@@ -44,8 +44,8 @@ app.configure(function(){
 });
 
 // Routes
-routes.init(app, languages.get('en-gb'));
-routes.init(app, languages.get('nl-nl'));
+routes.init(app, 'en-gb');
+routes.init(app, 'nl-nl');
 
 // Boot
 database.open(function() {
