@@ -5,12 +5,12 @@ var express = require('express');
 var app = express();
 
 // Environment Modules
-var languages = require('./languages');
-var environments = require('./environments');
+var languages = require('./modules/languages');
+var environments = require('./modules/environments');
 
 // Current Environment
 var env = environments.select('localhost');
-var lang = languages.select('en-GB');
+var lang = languages.select('nl-NL');
 
 // Application Modules
 var database = require('./modules/database');
