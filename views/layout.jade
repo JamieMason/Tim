@@ -8,6 +8,12 @@ html
 
     ul.nav.site-nav
       li
+        a.ico(href=langs.enGb(urlIndex))
+          img(src='/img/lang/en-gb.png', width=16, height=11)
+      li
+        a.ico(href=langs.nlNl(urlIndex))
+          img(src='/img/lang/nl-nl.png', width=16, height=11)
+      li
         a(href=lang('/login.route'))
           = lang('/login.label')
       li
@@ -16,11 +22,5 @@ html
       li
         a(href=lang('/restricted.route'))
           = lang('/restricted.label')
-      li
-        a.ico(href='/')
-          img(src='/img/lang/en-gb.png', width=16, height=11)
-      li
-        a.ico(href='/nl')
-          img(src='/img/lang/nl-nl.png', width=16, height=11)
 
     block content
