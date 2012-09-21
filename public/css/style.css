@@ -249,7 +249,7 @@ select {
   display: inline-block;
 }
 .site-nav > li a {
-  padding-right: 20px;
+  margin-right: 20px;
 }
 .msgs {
   padding-left: 0;
