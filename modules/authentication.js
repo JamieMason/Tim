@@ -1,6 +1,6 @@
-var messaging = null;
-var User = null;
-var lang = require('../modules/languages').get();
+var messaging;
+var User;
+var lang;
 
 /**
  * Query an email/password combination against the database, calling onComplete(err, user)
@@ -91,6 +91,7 @@ function exposeUser(req, res, next) {
  */
 exports.init = function(app) {
 
+  lang = require('../modules/languages').get();
   messaging = require('../modules/messaging');
   User = require('../models/User').get();
 
