@@ -10,12 +10,13 @@ var environments = require('./modules/environments');
 
 // Current Environment
 var env = environments.select('localhost');
-var lang = languages.select('nl-NL');
+languages.select('en-gb');
 
 // Application Modules
 var database = require('./modules/database');
 var messaging = require('./modules/messaging');
 var authentication = require('./modules/authentication');
+var routes = require('./routes');
 
 // Configuration
 app.configure(function(){
@@ -29,7 +30,6 @@ app.configure(function(){
   app.use(express.cookieParser(env('APP_COOKIE_SECRET')));
   app.use(express.session());
 
-  languages.init(app);
   messaging.init(app);
   authentication.init(app);
 
@@ -43,7 +43,8 @@ app.configure(function(){
 });
 
 // Routes
-require('./routes').init(app);
+routes.init(app, languages.get('en-gb'));
+routes.init(app, languages.get('nl-nl'));
 
 // Boot
 database.open(function() {

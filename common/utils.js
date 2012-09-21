@@ -4,32 +4,33 @@
  * This is useful in the case of environment config and languages for example.
  * @param {Object} params.extend
  * @param {String} params.dirRoot
- * @param {Function} [params.onCreate]
  * @return module
  */
 exports.packageProxy = function(params) {
 
   var module = params.extend;
   var modulePath = params.dirRoot;
-  var onCreate = params.onCreate || function(){};
   var dictionaries = {};
   var cursor = null;
 
   /**
    * Returns the named propery of dictionary, optionally performing a find/replace of the keys/values in replacements
+   * @param  {String} dictionary
    * @param  {String} definition
    * @param  {Object} [replacements]
    * @return {Mixed}
    * @private
    */
 
-  function getValue(definition, replacements) {
+  function getValue(dictionary, definition, replacements) {
 
-    if (!cursor) {
-      throw new Error('Call to get() when no call to select("dictionary") has been made');
+    dictionary = (dictionary || cursor);
+
+    if (!dictionaries[dictionary]) {
+      dictionaries[dictionary] = require(modulePath + '/' + dictionary);
     }
 
-    var value = dictionaries[cursor][definition];
+    var value = dictionaries[dictionary][definition];
     var token;
 
     if (replacements) {
@@ -52,24 +53,24 @@ exports.packageProxy = function(params) {
   module.select = function(dictionary) {
 
     cursor = dictionary;
-
-    if (!dictionaries[dictionary]) {
-      onCreate(dictionaries[dictionary] = require(modulePath + '/' + dictionary));
-    }
-
-    return getValue;
+    return getValue.bind({}, null);
 
   };
 
 
   /**
    * Return a getter for the selected dictionary
+   * @param  {String} [dictionary]
    * @return {Function} getValue
    */
 
-  module.get = function() {
+  module.get = function(dictionary) {
 
-    return getValue;
+    if (!dictionary && !cursor) {
+      throw new Error('Call to get() when no call to select("dictionary") has been made');
+    }
+
+    return getValue.bind({}, dictionary);
 
   };
 
