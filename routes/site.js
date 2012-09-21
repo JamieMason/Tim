@@ -1,19 +1,17 @@
-var lang = require('../modules/languages').get();
-
 exports.index = function(req, res) {
   res.render('index', {
-    title: lang('/.title')
+    title: res.locals.lang('/.title')
   });
 };
 
 exports.login = function(req, res) {
   res.render('login', {
-    title: lang('/login.title')
+    title: res.locals.lang('/login.title')
   });
 };
 
 exports.restricted = function(req, res) {
   res.render('restricted', {
-    title: lang('/restricted.title')
+    title: res.locals.lang('/restricted.title')
   });
 };

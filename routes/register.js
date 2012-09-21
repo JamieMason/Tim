@@ -1,8 +1,6 @@
-var lang = require('../modules/languages').get();
-
 exports.get = function(req, res) {
   res.render('register', {
-    title: lang('/register.title')
+    title: res.locals.lang('/register.title')
   });
 };
 
