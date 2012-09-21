@@ -10,7 +10,7 @@ var environments = require('./modules/environments');
 
 // Current Environment
 environments.select('localhost');
-languages.select('en-gb');
+languages.select('en-GB');
 
 // Application Modules
 var env = environments.get();
@@ -44,8 +44,8 @@ app.configure(function(){
 });
 
 // Routes
-routes.init(app, 'en-gb');
-routes.init(app, 'nl-nl');
+routes.init(app, 'en-GB');
+routes.init(app, 'nl-NL');
 
 // Boot
 database.open(function() {

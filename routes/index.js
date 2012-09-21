@@ -14,8 +14,8 @@ exports.init = function(app, langName) {
     register = require('./register');
     site = require('./site');
     langs = {
-      nlNl: languages.get('nl-nl'),
-      enGb: languages.get('en-gb')
+      nlNl: languages.get('nl-NL'),
+      enGb: languages.get('en-GB')
     };
   }
 
@@ -27,6 +27,7 @@ exports.init = function(app, langName) {
     // activate language
     languages.select(langName);
     locals.lang = lang;
+    locals.langName = langName;
     locals.langs = langs;
 
     // misc

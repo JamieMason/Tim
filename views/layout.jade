@@ -1,5 +1,5 @@
 doctype 5
-html
+html(lang=langName)
   head
     include includes/head
   body
@@ -9,10 +9,10 @@ html
     ul.nav.site-nav
       li
         a.ico(href=langs.enGb(urlIndex))
-          img(src='/img/lang/en-gb.png', width=16, height=11)
+          img(src='/img/lang/en-GB.png', width=16, height=11)
       li
         a.ico(href=langs.nlNl(urlIndex))
-          img(src='/img/lang/nl-nl.png', width=16, height=11)
+          img(src='/img/lang/nl-NL.png', width=16, height=11)
       li
         a(href=lang('/login.route'))
           = lang('/login.label')
