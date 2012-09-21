@@ -7,7 +7,7 @@
   "PASSWORD_NOT_SUPPLIED": "Wachtwoord mist",
   "CURRENT_USER"         : "Ingelogd als #{name} (#{email})",
 
-  "/.route"              : "/nl/",
+  "/.route"              : "/nl",
   "/login.route"         : "/nl/inloggen",
   "/logout.route"        : "/nl/uitloggen",
   "/register.route"      : "/nl/registreren",
