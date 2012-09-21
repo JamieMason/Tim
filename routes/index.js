@@ -1,8 +1,12 @@
-var site = require('./site');
-var register = require('./register');
-var authentication = require('../modules/authentication');
+var site;
+var register;
+var authentication;
 
 exports.init = function(app, lang) {
+
+  site = site || require('./site');
+  register = register || require('./register');
+  authentication = authentication || require('../modules/authentication');
 
   function activateLanguage(req, res, next) {
     res.locals.lang = lang;
