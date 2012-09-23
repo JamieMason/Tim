@@ -1,9 +1,10 @@
 var mongoose = require('mongoose');
-var database = require('../modules/database');
 var crypto = require('crypto');
+var database;
+var lang;
 var keyLength = 128;
 var iterations = 12000;
-var User = null;
+var User;
 
 /**
  * @param  {Object} mongoose
@@ -15,6 +16,11 @@ exports.get = function() {
 
   if (User) {
     return User;
+  }
+
+  if (!database) {
+    database = require('../modules/database');
+    lang = require('../modules/languages').get();
   }
 
   var db = database.get();
@@ -41,8 +47,7 @@ exports.get = function() {
     'name': {
       'type': String,
       'trim': true
-    },
-    'roster': [mongoose.Schema.Types.ObjectId]
+    }
   });
 
   /**
@@ -123,6 +128,56 @@ exports.get = function() {
   };
 
   /**
+   * @param  {String}   [params.name]
+   * @param  {String}   params.email
+   * @param  {String}   params.password
+   * @param  {String}   params.password2
+   * @param  {Function} params.onComplete fn(err, res)
+   * @static
+   */
+
+  schema.statics.register = function(params) {
+
+    params = params || {};
+
+    var user;
+
+    if (!params.onComplete) {
+      throw new Error('!params.onComplete');
+    }
+
+    if (!params.email) {
+      throw new Error('!params.email');
+    }
+
+    if (!params.password) {
+      throw new Error('!params.password');
+    }
+
+    if (!params.password2) {
+      throw new Error('!params.password2');
+    }
+
+    if (params.password !== params.password2) {
+      throw new Error('params.password !== params.password2');
+    }
+
+    function onSave(err, res) {
+      params.onComplete(err, user);
+    }
+
+    user = new User({
+      name: params.name || '',
+      email: params.email
+    });
+
+    user.encryptPassword(params.password, function(err, res) {
+      !err ? user.save(onSave) : params.onComplete(err, null);
+    });
+
+  };
+
+  /**
    * Validators
    */
 
@@ -154,10 +209,7 @@ exports.get = function() {
     var passwordIsValid = password && password.length >= 6 && password.search(outsidePasswordWhitelist) === -1;
 
     if (!passwordIsValid) {
-      return onComplete({
-        success: false,
-        result: 'Invalid Password'
-      });
+      return onComplete('Invalid Password');
     }
 
     schema.statics.getPasswordSalt(function(salt) {
@@ -168,10 +220,7 @@ exports.get = function() {
           self.hash = hash;
           self.salt = salt;
 
-          onComplete({
-            success: true,
-            result: self
-          });
+          onComplete(null, self);
         }
       });
     });
@@ -194,11 +243,13 @@ exports.get = function() {
     // don't save if invalid
     this.validate(function (err) {
       return err ?
-        done(err)
+        done(Object.keys(err.errors).map(function(name) {
+          return err.errors[name].type;
+        }).join('\n'))
         : !self.isNew ?
           next()
           : User.where('email').equals(self.email).where('_id').ne(self._id).findOne(function(err, result) {
-              return err ? done(err) : result ? done('Email already registered') : next();
+              return err ? done(err) : result ? done(['Email already registered']) : next();
             });
     });
 
