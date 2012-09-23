@@ -54,7 +54,7 @@ exports.get = function() {
    * Virtuals
    */
 
-  schema.virtual('isRegistered').get(function() {
+  schema.virtual('hasPassword').get(function() {
     return !!(this.hash && this.salt);
   });
 
@@ -81,12 +81,15 @@ exports.get = function() {
     if (!params) {
       throw new Error('!params');
     }
+
     if (!params.password) {
       throw new Error('!params.password');
     }
+
     if (!params.salt) {
       throw new Error('!params.salt');
     }
+
     if (!params.onComplete) {
       throw new Error('!params.onComplete');
     }
@@ -141,25 +144,30 @@ exports.get = function() {
     params = params || {};
 
     var user;
+    var errors = [];
 
     if (!params.onComplete) {
       throw new Error('!params.onComplete');
     }
 
     if (!params.email) {
-      throw new Error('!params.email');
+      errors.push(lang('EMAIL_NOT_SUPPLIED'));
     }
 
     if (!params.password) {
-      throw new Error('!params.password');
+      errors.push(lang('PASSWORD_NOT_SUPPLIED'));
     }
 
     if (!params.password2) {
-      throw new Error('!params.password2');
+      errors.push(lang('REPEAT_PASSWORD_NOT_SUPPLIED'));
     }
 
     if (params.password !== params.password2) {
-      throw new Error('params.password !== params.password2');
+      errors.push(lang('PASSWORDS_DO_NOT_MATCH'));
+    }
+
+    if (errors.length) {
+      return params.onComplete(errors, null);
     }
 
     function onSave(err, res) {
@@ -173,6 +181,20 @@ exports.get = function() {
 
     user.encryptPassword(params.password, function(err, res) {
       !err ? user.save(onSave) : params.onComplete(err, null);
+    });
+
+  };
+
+  /**
+   * Reports whether a user is registered with the supplied email
+   * @param  {String}   email
+   * @param  {Function} onComplete([err:Object], result:Boolean)
+   */
+
+  schema.statics.isRegistered = function(email, onComplete) {
+
+    User.where('email').equals(email).findOne(function(err, user) {
+      err ? onComplete(lang('DB_ERROR')) : onComplete(null, !!user);
     });
 
   };
@@ -236,8 +258,8 @@ exports.get = function() {
     var self = this;
 
     // don't save unless we have a hash and salt
-    if (this.isRegistered !== true) {
-      this.invalidate('isRegistered', 'User is not registered');
+    if (this.hasPassword !== true) {
+      this.invalidate('hasPassword', 'User has no password');
     }
 
     // don't save if invalid

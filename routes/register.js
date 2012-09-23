@@ -1,5 +1,5 @@
-var messaging = require('../modules/messaging');
-var registration = require('../modules/registration');
+var User;
+var messaging;
 
 exports.get = function(req, res) {
   res.render('register', {
@@ -8,24 +8,34 @@ exports.get = function(req, res) {
 };
 
 exports.post = function(req, res) {
+
+  User = User || require('../models/User').get();
+  messaging = messaging || require('../modules/messaging');
+
   var body = req.body;
 
-  registration.register({
+  User.register({
     name: body.name,
     email: body.email,
     password: body.password,
     password2: body.password2,
     onComplete: function(err, user) {
+
       if (err) {
         messaging.queue('error', req, err);
         res.redirect(res.locals.lang('/register.route'));
-      } else {
+      }
+
+      else {
         messaging.queue('success', req, res.locals.lang('REGISTER_SUCCESS', {
           name: body.name,
           email: body.email
         }));
+
         res.redirect(res.locals.lang('/.route'));
       }
+
     }
   });
+
 };
