@@ -8,6 +8,7 @@
   "EMAIL_NOT_FOUND"             : "Geen gebruiker gevonden met het e-mailadres #{email}",
   "EMAIL_NOT_SUPPLIED"          : "E-mailadres mist",
   "LABEL_EMAIL"                 : "E-mailadres",
+  "LABEL_JOIN_DATE"             : "Lid sinds",
   "LABEL_NAME"                  : "Naam",
   "LABEL_PASSWORD"              : "Wachtwoord",
   "LABEL_PASSWORD_REPEAT"       : "Wachtwoord (nog een keer)",

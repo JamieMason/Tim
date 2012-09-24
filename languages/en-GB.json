@@ -8,6 +8,7 @@
   "EMAIL_NOT_FOUND"             : "No user found with email #{email}",
   "EMAIL_NOT_SUPPLIED"          : "Email missing",
   "LABEL_EMAIL"                 : "Email",
+  "LABEL_JOIN_DATE"             : "Member since",
   "LABEL_NAME"                  : "Name",
   "LABEL_PASSWORD"              : "Password",
   "LABEL_PASSWORD_REPEAT"       : "Password (again)",
