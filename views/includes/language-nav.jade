@@ -1,6 +1,5 @@
 ul.nav.banner-nav.icon-nav
-  - var languages = [[langs.enGb, 'en-GB'], [langs.nlNl, 'nl-NL']]
-    each language in languages
-      li(class=langName == language[1] ? 'cursor' : false)
-        a.ico(href=language[0](urlIndex))
-          img(src='/img/lang/' + language[1] + '.png', width=16, height=11)
+    each language in lang.all
+      li(class=lang.currentName == language.name ? 'cursor' : false)
+        a.ico(href=language.fn(urlIndex))
+          img(src='/img/lang/' + language.name + '.png', width=16, height=11)

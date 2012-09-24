@@ -1,11 +1,12 @@
 var authentication;
 var authRoutes;
 var languages;
+var allLanguages;
+var allRoutes;
 var register;
 var site;
-var langs;
 
-exports.init = function(app, langName) {
+exports.init = function(app, languageName) {
 
   if (!authentication) {
     authentication = require('../modules/authentication');
@@ -13,27 +14,30 @@ exports.init = function(app, langName) {
     languages = require('../modules/languages');
     register = require('./register');
     site = require('./site');
-    langs = {
-      nlNl: languages.get('nl-NL'),
-      enGb: languages.get('en-GB')
-    };
+
+    allLanguages = [
+      { fn: languages.get('en-GB'), name: 'en-GB' },
+      { fn: languages.get('nl-NL'), name: 'nl-NL' }
+    ];
+
+    allRoutes = [
+      { route: '/login.route', label: '/login.label'},
+      { route: '/register.route', label: '/register.label'},
+      { route: '/restricted.route', label: '/restricted.label'},
+      { route: '/users.route', label: '/users.label'}
+    ];
   }
 
-  var lang = languages.get(langName);
+  var lang = languages.get(languageName);
 
   function provideLocals(index, req, res, next) {
     var locals = res.locals;
-
-    // activate language
-    languages.select(langName);
+    languages.select(languageName);
     locals.lang = lang;
-    locals.langName = langName;
-    locals.langs = langs;
-
-    // misc
+    locals.lang.currentName = languageName;
+    locals.lang.all = allLanguages;
+    locals.routes = allRoutes;
     locals.urlIndex = index;
-
-    // continue
     next();
   }
 
@@ -44,5 +48,6 @@ exports.init = function(app, langName) {
   app.get  (lang('/register.route'),   provideLocals.bind(app, '/register.route'),   register.get);
   app.post (lang('/register.route'),   provideLocals.bind(app, '/register.route'),   register.post);
   app.get  (lang('/restricted.route'), provideLocals.bind(app, '/restricted.route'), authentication.restrictRoute, site.restricted);
+  app.get  (lang('/users.route'),      provideLocals.bind(app, '/users.route'),      site.users);
 
 };

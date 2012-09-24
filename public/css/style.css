@@ -232,6 +232,12 @@ select {
   color: #666;
   padding: 0.5rem 0.6rem;
 }
+table {
+  width: 100%;
+}
+th {
+  text-align: left;
+}
 .island {
   padding: 1.5em;
 }

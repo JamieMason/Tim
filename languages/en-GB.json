@@ -23,6 +23,7 @@
   "/register.route"             : "/register",
   "/restricted.route"           : "/restricted",
   "/reset-password.route"       : "/reset-password",
+  "/users.route"                : "/users",
 
   "/.title"                     : "Welcome",
   "/login.title"                : "Sign In",
@@ -30,11 +31,13 @@
   "/register.title"             : "Register",
   "/restricted.title"           : "Welcome to VIP!",
   "/reset-password.title"       : "Reset Password",
+  "/users.title"                : "Users",
 
   "/.label"                     : "Home",
   "/login.label"                : "Sign In",
   "/logout.label"               : "Sign Out",
   "/register.label"             : "Register",
   "/restricted.label"           : "Members Area",
-  "/reset-password.label"       : "Reset Password"
+  "/reset-password.label"       : "Reset Password",
+  "/users.label"                : "Users"
 }

@@ -23,6 +23,7 @@
   "/register.route"             : "/nl/registreren",
   "/restricted.route"           : "/nl/restricted",
   "/reset-password.route"       : "/nl/wachtwoord-wijzigen",
+  "/users.route"                : "/nl/gebruikers",
 
   "/.title"                     : "Welkom",
   "/login.title"                : "Inloggen",
@@ -30,11 +31,13 @@
   "/register.title"             : "Registratie",
   "/restricted.title"           : "Welkom bij VIP!",
   "/reset-password.title"       : "Wachtwoord wijzigen",
+  "/users.title"                : "Gebruikers",
 
   "/.label"                     : "Voorpagina",
   "/login.label"                : "Inloggen",
   "/logout.label"               : "Uitloggen",
   "/register.label"             : "Registreren",
   "/restricted.label"           : "Leden",
-  "/reset-password.label"       : "Wachtwoord wijzigen"
+  "/reset-password.label"       : "Wachtwoord wijzigen",
+  "/users.label"                : "Gebruikers"
 }

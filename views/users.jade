@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  if users
+    table
+      thead
+        tr
+          th(scope='col')= 'Name'
+          th(scope='col')= 'Email'
+          th(scope='col')= 'Joined'
+      tbody
+      each user in users
+        tr
+          td= user.name
+          td= user.email
+          td= user.created

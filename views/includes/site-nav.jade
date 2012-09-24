@@ -1,6 +1,5 @@
 ul.nav.banner-nav
-  - var pages = [['/login.route', '/login.label'], ['/register.route', '/register.label'], ['/restricted.route', '/restricted.label']]
-    each page in pages
-      li(class=urlIndex == page[0] ? 'cursor' : false)
-        a(href=lang(page[0]))
-          = lang(page[1])
+    each route in routes
+      li(class=urlIndex == route.route ? 'cursor' : false)
+        a(href=lang(route.route))
+          = lang(route.label)
