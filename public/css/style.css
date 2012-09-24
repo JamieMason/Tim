@@ -245,11 +245,30 @@ select {
 .nav > li {
   display: inline;
 }
+.nav > li,
 .nav > li a {
   display: inline-block;
+  *display: inline;
+  zoom: 1;
 }
-.site-nav > li a {
-  margin-right: 20px;
+.banner-nav {
+  text-align: center;
+}
+.banner-nav > li {
+  margin-left: 20px;
+}
+.banner-nav > li:first-child {
+  margin-left: 0;
+}
+.cursor > a {
+  color: #c00;
+}
+.icon-nav > li img {
+  border: 1px solid transparent;
+  padding: 1px;
+}
+.icon-nav > .cursor img {
+  border-color: #444;
 }
 .msgs {
   padding-left: 0;

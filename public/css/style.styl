@@ -45,24 +45,20 @@ select
 // Common
 // ============================================================
 
-.island
-  padding: 1.5em
+@import '../../stylus/island-object'
+@import '../../stylus/nav-abstraction'
+@import '../../stylus/banner-nav'
 
-.island > :last-child
-  margin-bottom: 0
+.cursor > a
+  color: #C00
 
-.nav
-  list-style: none
-  padding-left: 0
+.icon-nav > li img
+  border: 1px solid transparent
+  padding: 1px
 
-.nav > li
-  display: inline
+.icon-nav > .cursor img
+  border-color: #444
 
-.nav > li a
-  display: inline-block
-
-.site-nav > li a
-  margin-right: 20px
 
 // ============================================================
 // Global Messages
