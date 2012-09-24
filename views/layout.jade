@@ -5,22 +5,8 @@ html(lang=langName)
   body
     include includes/current-user
     include includes/messaging
-
-    ul.nav.site-nav
-      li
-        a.ico(href=langs.enGb(urlIndex))
-          img(src='/img/lang/en-GB.png', width=16, height=11)
-      li
-        a.ico(href=langs.nlNl(urlIndex))
-          img(src='/img/lang/nl-NL.png', width=16, height=11)
-      li
-        a(href=lang('/login.route'))
-          = lang('/login.label')
-      li
-        a(href=lang('/register.route'))
-          = lang('/register.label')
-      li
-        a(href=lang('/restricted.route'))
-          = lang('/restricted.label')
+    include includes/site-nav
 
     block content
+
+    include includes/language-nav
