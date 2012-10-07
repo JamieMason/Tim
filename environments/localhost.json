@@ -1,7 +1,11 @@
 {
-  "APP_PORT"           : 3000
-  , "APP_COOKIE_SECRET": "Monkey Island"
-  , "DB_HOST"          : "localhost"
-  , "DB_PORT"          : 27017
-  , "DB_DATABASE"      : "myapp"
+  "APP_PORT"         : 3000,
+  "APP_COOKIE_SECRET": "Monkey Island",
+  "DB_HOST"          : "localhost",
+  "DB_PORT"          : 27017,
+  "DB_DATABASE"      : "myapp",
+  "LANGUAGE"         : "en-GB",
+  "PATH_VIEWS"       : "#{root}/views",
+  "PATH_LANGUAGES"   : "#{root}/languages",
+  "PATH_STATIC"      : "#{root}/public"
 }

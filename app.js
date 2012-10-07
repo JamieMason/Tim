@@ -7,13 +7,13 @@ var app = express();
 // Environment Modules
 var languages = require('./modules/languages');
 var environments = require('./modules/environments');
+var env = environments.get();
 
 // Current Environment
-environments.select('localhost');
-languages.select('en-GB');
+environments.select('localhost'); // @TODO: take from stdin
+languages.select(env('LANGUAGE'));
 
 // Application Modules
-var env = environments.get();
 var database = require('./modules/database');
 var messaging = require('./modules/messaging');
 var authentication = require('./modules/authentication');
@@ -21,8 +21,12 @@ var routes = require('./routes');
 
 // Configuration
 app.configure(function(){
+  var appRoot = { root: __dirname };
+  var staticPath = env('PATH_STATIC', appRoot);
+  var viewsPath = env('PATH_VIEWS', appRoot);
+
   app.set('port', env('APP_PORT'));
-  app.set('views', __dirname + '/views');
+  app.set('views', viewsPath);
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
@@ -35,8 +39,8 @@ app.configure(function(){
   authentication.init(app);
 
   app.use(app.router);
-  app.use(require('stylus').middleware(__dirname + '/public'));
-  app.use(express['static'](path.join(__dirname, 'public')));
+  app.use(require('stylus').middleware(staticPath));
+  app.use(express['static'](staticPath));
 
   if (app.get('env') === 'development') {
     app.use(express.errorHandler());
