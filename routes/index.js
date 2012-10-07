@@ -1,7 +1,6 @@
 var authentication;
 var authRoutes;
 var languages;
-var allLanguages;
 var allRoutes;
 var register;
 var site;
@@ -14,11 +13,6 @@ exports.init = function(app, languageName) {
     languages = require('../modules/languages');
     register = require('./register');
     site = require('./site');
-
-    allLanguages = [
-      { fn: languages.get('en-GB'), name: 'en-GB' },
-      { fn: languages.get('nl-NL'), name: 'nl-NL' }
-    ];
 
     allRoutes = [
       { route: '/login.route', label: '/login.label'},
@@ -35,7 +29,7 @@ exports.init = function(app, languageName) {
     languages.select(languageName);
     locals.lang = lang;
     locals.lang.currentName = languageName;
-    locals.lang.all = allLanguages;
+    locals.lang.all = languages.all;
     locals.routes = allRoutes;
     locals.urlIndex = index;
     next();
