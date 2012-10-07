@@ -3,5 +3,5 @@
   , "APP_COOKIE_SECRET": "Monkey Island"
   , "DB_HOST"          : "localhost"
   , "DB_PORT"          : 27017
-  , "DB_DATABASE"      : "whats-the-team"
+  , "DB_DATABASE"      : "myapp"
 }
